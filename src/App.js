@@ -35,22 +35,23 @@ function App() {
     let promises= []
     let pinData = []
     let pines = ['ocean',"Paris","plants","cats"]
-    pines.forEach(async(pinTerm)=>{
+    console.log("new cambio1")
+    console.log("new cambio2")
+    pines.forEach((pinTerm)=>{
       promises.push(
-         getImages(pinTerm).then(res => {
-          let results = res.data.results;
-          pinData = pinData.concat(results)
-          pinData.sort(function(a,b){
-            return 0.5 - Math.random()
-          });
-        })
+         getImages(pinTerm)
       ) 
     });
-
-    Promise.all(promises).then(()=>{
-      setPins(pinData)
-    });
-
+    const allData = await Promise.all(promises)
+    allData.forEach((res)=> {
+      pinData = pinData.concat(res.data.results)
+      pinData.sort(function(a,b){
+        return 0.5 - Math.random()
+      });
+    })
+    setPins(pinData)
+    
+  
   }
 
   useEffect(() => {
@@ -59,14 +60,14 @@ function App() {
      
      console.log("porb await", pins)
   }, [])
-  useEffect(() => {
+  /*useEffect(() => {
    
    console.log("porb await 2", pins)
-}, [pins])
+}, [pins])*/
   return (
     
     <div className="app">
-      {console.log("html",pins)}
+      {/*console.log("html",pins)*/}
       <Header oneSubmit={onSearchSubmit}/>
       <MainBoard pins={pins}/>
     </div>
