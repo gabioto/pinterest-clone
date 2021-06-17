@@ -36,6 +36,7 @@ function App() {
     let pinData = []
     let pines = ['ocean',"Paris","plants","cats"]
     console.log("new cambio1")
+    console.log("new cambio2")
     pines.forEach((pinTerm)=>{
       promises.push(
          getImages(pinTerm)
